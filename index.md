@@ -1,6 +1,6 @@
 ---
-title: This is my title
+title: Frisoft
 layout: post
 ---
 
-# Frisoft website test.
+# Frisoft website.
