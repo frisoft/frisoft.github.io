@@ -1,0 +1,103 @@
+body {
+	font-family: Georgia, serif;
+	font-size: 18px;
+	margin: 0;
+	background: url(../images/sfondo.png) repeat-x;
+}
+
+a {
+	color: #337222;
+}
+
+img {
+	border: 0px;
+}
+
+div.contenuto {
+	font-size: 18px;
+	width: 700px;
+	margin: 0px auto;
+	margin-top: 60px;
+	padding: 0px;
+	text-align: center;
+}
+
+div.footer {
+	margin-top: 40px;
+	font-family: sans-serif;
+	font-size: 11px;
+	color: gray;
+	text-align: center;
+}
+
+div.sinistra {
+	float: left;
+	text-align: left;
+	width: 200px;
+}
+div.destra {
+	float:right;
+	width:450px;
+	font-weight: normal;
+	text-align: left;
+	line-height: 140%;
+}
+
+div.separatore {
+	clear: both;
+	margin:0px;
+	padding:15px 0pt 0pt;
+	margin-bottom: 5px;
+	border-top: 1px solid silver;
+}
+
+table {
+	width: 100%;
+}
+
+td {	
+	text-align: left; 
+	vertical-align: top;
+}
+
+.center { text-align: center; }
+.right { 	text-align: right; }
+
+input, select, textarea {
+	border: 1px solid #337222;
+	color: #337222;
+	font-weight: bold;
+}
+
+div.flash-notice {
+	font-weight: bold;
+	border: 2px solid #337222;
+	padding: 20px;
+	margin-bottom: 15px;
+}
+
+div.flash-error {
+	font-weight: bold;
+	color: red;
+	border: 2px solid red;
+	padding: 20px;
+	margin-bottom: 15px;
+}
+
+p { margin-top: 0px; }
+
+#logo { margin-bottom: 15px; }
+
+input, select, textarea {
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+div.fieldWithErrors input, div.fieldWithErrors textarea, div.fieldWithErrors select {
+	border: 2px solid red;
+}
+div.formError {
+	color: red;
+	font-family: sans-serif;
+	font-size: 16px;
+}

@@ -1,4 +1,0 @@
-frisoft
-=======
-
-Frisoft website
