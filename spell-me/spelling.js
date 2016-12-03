@@ -7,7 +7,6 @@ dictionary_url = 'http://www.collinsdictionary.com/dictionary/english/'
 //   ['please', sound_base_url+'/sounds/e/en_/en_gb/en_gb_hello.mp3']
 // ];
 
-
 word_text = function(word) {
   return word[0];
 }
@@ -99,7 +98,6 @@ save_to_url = function(words) {
 }
 
 save_words = function() {
-  // $('#save-words-link').hide();
   new_words = [];
   $('#words .editor').each(function(){
     word = $(this).find('input.word-text').val();
@@ -109,10 +107,6 @@ save_words = function() {
       new_words.push([word, sound]);
     }
   });
-  // show_spelling_url(new_words);
-  // render_words(new_words);
-  // $('#words .editor').hide();
-  // $('#edit-words-link').show();
   save_to_url(new_words);
 }
 
@@ -121,8 +115,26 @@ words_from_url = function() {
   return decompress_words(query);
 }
 
+shuffle = function(a) {
+  for (let i = a.length; i; i--) {
+      let j = Math.floor(Math.random() * i);
+      [a[i - 1], a[j]] = [a[j], a[i - 1]];
+  }
+  return a;
+}
+
+function reset_links() {
+  hide_words();
+  $('#save-words-link').hide();
+  $('#edit-words-link').show();
+}
+
+shuffle_words = function() {
+  render_words(shuffle(words_from_url()));
+  reset_links();
+}
+
 init = function() {
-  console.log(words_from_url());
   render_words(words_from_url());
 }
 
