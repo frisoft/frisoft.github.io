@@ -27,9 +27,10 @@ word_dictionary_url = function(word) {
 word_to_html = function(word, i) {
   return '<tr id="word-'+i+'">'+
       ( word_sound(word) !== '' ?
-        '<td class="number" width="5%">'+(i+1)+'</td>'+
-        '<td width="20%">'+
+        '<td class="number" width="1%">'+(i+1)+'</td>'+
+        '<td width="1%">'+
           '<a href="#" onclick="return play_sound(\''+word_sound(word)+'\')">say</a> '+
+        '</td><td width="1%">'+
           '<a class="word" style="display: none" href="'+word_dictionary_url(word)+'" target="_blank">dictionary</a>'+
         '</td><td>'+
           '<span class="word" style="display: none"><b>'+word_text(word)+'</b></span> '+
