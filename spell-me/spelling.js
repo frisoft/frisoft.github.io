@@ -25,24 +25,27 @@ word_dictionary_url = function(word) {
 }
 
 word_to_html = function(word, i) {
-  return '<div id="word-'+i+'">'+
+  return '<tr id="word-'+i+'">'+
       ( word_sound(word) !== '' ?
-        '<span class="number">'+(i+1)+' - </span>'+
-        '<span>'+
+        '<td class="number" width="5%">'+(i+1)+'</td>'+
+        '<td width="20%">'+
           '<a href="#" onclick="return play_sound(\''+word_sound(word)+'\')">say</a> '+
-          '<span class="word" style="display: none">'+word_text(word)+'</span> '+
           '<a class="word" style="display: none" href="'+word_dictionary_url(word)+'" target="_blank">dictionary</a>'+
-        '</span>' : '' )+
-      '<span class="editor" style="display:none">'+
+        '</td><td>'+
+          '<span class="word" style="display: none"><b>'+word_text(word)+'</b></span> '+
+        '</td>' : '' )+
+      '<td class="editor" style="display:none">'+
         '<input type="text" class="word-text" value="'+word_text(word)+'"/>'+
         '<input type="text" class="word-sound" value="'+word_sound(word)+'"/>'+
         '<a class="word" href="'+word_dictionary_url(word)+'" target="_blank">dictionary</a>'+
-      '</span>'+
-    '</div>'
+      '</td>'+
+    '</tr>'
 };
 
 words_to_html = function(words) {
-  return words.concat([['','']]).map(word_to_html).join('');
+  return '<table class="table">'+
+    words.concat([['','']]).map(word_to_html).join('')+
+    '</table>';
 };
 
 render_words = function(words) {
