@@ -1,32 +1,60 @@
+<!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Spell me</title>
+    <link rel="stylesheet" href="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
-<body>
-  <div class="container">
-    <h1>Spelling</h1>
+  <body>
+    <div id="main"></div>
+    <script src="js/main.min.js"></script>
+    <script src="js-lib/lz-string.min.js"></script>
+    <script>
+      words_from_url = function() {
+        query = window.location.search.substring(1);
+        words = decompress_words(query);
+        return words || [];
+      }
 
-    <div id="words">
+      save = function(words) {
+        push_url(to_url(words));
+      }
 
-    </div>
+      to_str = function(json) {
+        return JSON.stringify(json);
+      }
 
-    <div>
-      <a id="show-words-link" href="#" onclick="return show_words()" class="btn btn-primary">Show words</a>
-      <a id="hide-words-link" href="#" onclick="return hide_words()" class="btn btn-primary" style="display:none">Hide words</a>
+      compress_words = function(words) {
+        return LZString.compressToEncodedURIComponent(to_str(words));
+      }
 
-      <a id="shuffle-words-link" href="#" onclick="return shuffle_words()" class="btn btn-primary">Shuffle words</a>
+      to_json = function(str) {
+        return JSON.parse(str);
+      }
 
-      <a id="edit-words-link" href="#" onclick="return edit_words()" class="btn btn-warning">Edit words</a>
-      <a id="save-words-link" href="#" onclick="return save_words()" class="btn btn-warning" style="display:none">Save words</a>
-    </div>
+      decompress_words = function(str) {
+        return to_json(LZString.decompressFromEncodedURIComponent(str));
+      }
 
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-      integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
-      crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/lib/lz-string.min.js"></script>
-    <script type="text/javascript" src="spelling.js"></script>
-  </div>
-</body>
+      to_url = function(words) {
+        return window.location.origin + window.location.pathname + '?' + compress_words(words);
+      }
+
+      push_url = function(url) {
+        history.pushState(null, null, url);
+      }
+
+      var node = document.getElementById('main');
+      var app = Elm.Main.embed(node,
+        {
+          'words': words_from_url()
+        }
+      );
+
+      app.ports.save.subscribe(function(words) {
+        save(words);
+      });
+    </script>
+  </body>
 </html>
